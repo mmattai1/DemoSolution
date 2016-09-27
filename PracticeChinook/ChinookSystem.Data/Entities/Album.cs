@@ -11,8 +11,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChinookSystem.Data.Entities
 {
+    [Table("Albums")]
     public class Album
     {
-
+        [Key]
+        public int AlbumId { get; set; }
+        public string Title { get; set; }
+        public int ArtistId { get; set; }
+        public int ReleaseYear { get; set; }
+        public string ReleaseLabel { get; set; }
     }
 }
