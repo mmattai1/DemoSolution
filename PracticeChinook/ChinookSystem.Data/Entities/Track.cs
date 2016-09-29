@@ -14,6 +14,7 @@ namespace ChinookSystem.Data.Entities
     [Table("Tracks")]
     public class Track
     {
+        [Key]
         public int TrackId { get; set; }
         public string Name { get; set; }
         public int? AlbumId { get; set; }
@@ -22,6 +23,13 @@ namespace ChinookSystem.Data.Entities
         public string Composer { get; set; }
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
-        public double UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
+
+        public virtual Album Albums { get; set; }
+        public virtual MediaType MediaTypes { get; set; }
+
+        // Genre parent
+        // InvoiceLines children
+        // PlaylistTracks children
     }
 }
