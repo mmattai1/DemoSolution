@@ -34,20 +34,21 @@ namespace ChinookSystem.BLL
         // This will use Linq to Entity data access
         // POCO classes will be used to define the data
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<ArtistAlbums> ArtistAlbums_Get()
+        public List<ArtistAlbums> ArtistAlbums_Get(int releaseYear)
         {
             // Setup the transaction area
             using (var context = new ChinookContext())
             {
-                var results = (from x in context.Albums
-                              where x.ReleaseYear == 2008
-                              orderby x.Artists.Name, x.Title
+                var results = from x in context.Albums
+                              where x.ReleaseYear == releaseYear
+                              orderby x.Artist.Name, x.Title
                               select new ArtistAlbums
                               {
-                                  Name = x.Artists.Name,
+                                  Name = x.Artist.Name,
                                   Title = x.Title
-                              }).ToList();
-                return results;
+                              };
+                // The .ToList will actually cause the query to execute
+                return results.ToList();
             }
         }
     }

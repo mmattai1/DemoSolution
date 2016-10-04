@@ -44,9 +44,13 @@
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\MediaType.cs" />
     <Compile Include="Entities\Track.cs" />
     <Compile Include="POCOs\ArtistAlbums.cs" />
+    <Compile Include="POCOs\EmployeeNames.cs" />
+    <Compile Include="POCOs\RepresentativeCustomers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

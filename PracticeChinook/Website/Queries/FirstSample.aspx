@@ -10,4 +10,19 @@
         </Columns>
     </asp:GridView>
     <asp:ObjectDataSource ID="EntityFrameworkODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_ListAll" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
+    <h3>Linq to Entity Data Access</h3>
+    <asp:Label ID="ReleaseYearLabel" runat="server" Text="Enter a release year of interest" />&nbsp&nbsp
+    <asp:TextBox ID="ReleaseYear" runat="server" /><br />
+    <asp:Button ID="Fetch" runat="server" Text="Fetch" /><br />
+    <asp:GridView ID="LinqToEntityList" runat="server" AutoGenerateColumns="False" DataSourceID="LinqToEntityODS">
+        <Columns>
+            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
+            <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title"></asp:BoundField>
+        </Columns>
+    </asp:GridView>
+    <asp:ObjectDataSource ID="LinqToEntityODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="ArtistAlbums_Get" TypeName="ChinookSystem.BLL.ArtistController">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ReleaseYear" PropertyName="Text" Name="releaseYear" Type="Int32"></asp:ControlParameter>
+        </SelectParameters>
+    </asp:ObjectDataSource>
 </asp:Content>
