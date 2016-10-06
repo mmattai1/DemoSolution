@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.ComponentModel;            // ODS
 using eRestaurantSystem.DAL;            // Context class
 using eRestaurantSystem.Data.Entities;  // Entity classes
-using eRestaurantSystem.Data;     // POCOs classes
 #endregion
 
 namespace eRestaurantSystem.BLL
