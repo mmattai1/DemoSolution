@@ -10,6 +10,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website(1)", "Website\", "{18AE2327-A0FE-49D2-8E4D-9A5BA105897C}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		ProjectReferences = "{65f5b3ff-4595-4ec1-ab63-e1ff05cbe584}|eRestaurantSystem.dll;{5923ED78-661C-486E-B667-5EE8BB564F7F}|eRestaurantSystem.Data.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_6912"
 		Debug.AspNetCompiler.PhysicalPath = "Website\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_6912\"
@@ -25,6 +26,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website(1)", "Website\", "{
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "6912"
+		SlnRelativePath = "Website\"
 	EndProjectSection
 EndProject
 Global
