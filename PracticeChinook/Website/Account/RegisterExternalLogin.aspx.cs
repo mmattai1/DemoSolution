@@ -4,6 +4,10 @@ using System;
 using System.Web;
 using Website;
 
+#region Additional Namespaces for Security
+using ChinookSystem.Security;
+#endregion
+
 public partial class Account_RegisterExternalLogin : System.Web.UI.Page
 {
     protected string ProviderName

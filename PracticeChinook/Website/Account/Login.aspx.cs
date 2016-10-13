@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using Website;
 
+#region Additional Namespaces for Security
+using ChinookSystem.Security;
+#endregion
+
 public partial class Account_Login : Page
 {
         protected void Page_Load(object sender, EventArgs e)
