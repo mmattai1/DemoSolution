@@ -2,6 +2,7 @@
 <%@ Import Namespace="Website" %>
 <%@ Import Namespace="System.Web.Optimization" %>
 <%@ Import Namespace="System.Web.Routing" %>
+<%@ Import Namespace="ChinookSystem.Security" %>
 
 <script runat="server">
 
@@ -9,6 +10,14 @@
     {
         RouteConfig.RegisterRoutes(RouteTable.Routes);
         BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+        // These methods are for setting up the security for the execution of the application
+        // This method runs when IIS starts the application
+        var RoleManager = new RoleManager();
+        RoleManager.AddChinookRoles();
+
+        var UserManager = new UserManager();
+        UserManager.AddWebMaster();
     }
 
 </script>
