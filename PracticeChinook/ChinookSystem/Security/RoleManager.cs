@@ -18,5 +18,18 @@ namespace ChinookSystem.Security
 
         }
 
+        public void AddChinookRoles()
+        {
+            foreach(string roleName in SecurityRoles.ChinookSecurityRoles)
+            {
+                // Check the security tables of the Chinook security system to see if any new role needs to be added to the security table data
+                // The first time your application runs, all the roles will be added to the security table data
+                // All other times your application runs (start), only new roles in the ChinnoSecurityRoles will be added to the security table data
+                if (!Roles.Any(r => r.Name.Equals(roleName)))
+                {
+                    this.Create(new IdentityRole(roleName));
+                }
+            }
+        }
     }
 }
