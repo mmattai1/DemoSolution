@@ -78,10 +78,11 @@
 
                             <%-- A drop down menu has nested menu items --%>
                             <asp:MenuItem Text="Queries" Value="query">
-                                <asp:MenuItem Text="First Sample" NavigateUrl="~\Queries\FirstSample" />
-                                <asp:MenuItem Text="Customer of Rep" NavigateUrl="~\Queries\CustomerRep" />
+                                <asp:MenuItem Text="First Sample" NavigateUrl="~/Queries/FirstSample" />
+                                <asp:MenuItem Text="Customer of Rep" NavigateUrl="~/Queries/CustomerRep" />
                             </asp:MenuItem>
 
+                            <asp:MenuItem Text="User Maintenance" NavigateUrl="~/Admin/Security/Default" />
                             <asp:MenuItem Text="About" NavigateUrl="~/About" />
                             <asp:MenuItem Text="Contact" NavigateUrl="~/Contact" />
                         </Items>
