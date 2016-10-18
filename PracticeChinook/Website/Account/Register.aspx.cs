@@ -14,9 +14,15 @@ public partial class Account_Register : Page
     {
         var manager = new UserManager();
         var user = new ApplicationUser() { UserName = UserName.Text };
+
+        // Creates the user record on AspNetUsers
         IdentityResult result = manager.Create(user, Password.Text);
+
         if (result.Succeeded)
         {
+            // If a person successfully registers they will be treated as a security role RegisteredUser
+            manager.AddToRole(user.Id, SecurityRoles.RegisteredUsers);
+
             IdentityHelper.SignIn(manager, user, isPersistent: false);
             IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
         }

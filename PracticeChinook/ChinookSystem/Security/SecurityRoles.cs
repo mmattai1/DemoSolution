@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;                    // UserManager
 
 namespace ChinookSystem.Security
 {
-    internal static class SecurityRoles
+    public static class SecurityRoles
     {
         public const string WebsiteAdmins = "WebsiteAdmins";
         public const string RegisteredUsers = "RegisteredUsers";
@@ -19,7 +19,7 @@ namespace ChinookSystem.Security
         public const string Auditor = "Auditor";
 
         // Property that is read-only which will return all of the roles in the application
-        public static List<string> ChinookSecurityRoles
+        internal static List<string> ChinookSecurityRoles
         {
             get
             {
