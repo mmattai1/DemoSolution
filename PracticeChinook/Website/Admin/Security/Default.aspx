@@ -19,10 +19,15 @@
                 <div class="tab-pane fade in active" id="users">
                     <h2>User CRUD</h2>
                 </div>
+
                 <!-- Role Tab -->
                 <div class="tab-pane fade" id="roles">
-                    <h2>Role CRUD</h2>
-                    <asp:ListView ID="RoleListView" runat="server">
+                    <asp:ListView ID="RoleListView" runat="server"
+                        DataSourceID="RoleListViewODS"
+                        InsertItemPosition="LastItem"
+                        ItemType="ChinookSystem.Security.RoleProfile"
+                        DataKeyNames="RoleId"
+                        OnItemDeleted="RefreshAll">
                         <EmptyDataTemplate>
                             <span>No security roles have been set up.</span>
                         </EmptyDataTemplate>
@@ -32,6 +37,7 @@
                                 <div class="col-sm-3 h4">Role</div>
                                 <div class="col-sm-6 h4">Members</div>
                             </div>
+                            <div runat="server" id="itemPlaceholder"></div>
                         </LayoutTemplate>
                         <ItemTemplate>
                             <div class="row">
@@ -53,10 +59,10 @@
                         </ItemTemplate>
                         <InsertItemTemplate>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-1">
                                     <asp:LinkButton ID="InsertRole" runat="server" CommandName="Insert">Insert</asp:LinkButton>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <asp:LinkButton ID="CancelButton" runat="server" CommandName="Cancel">Cancel</asp:LinkButton>
                                 </div>
                                 <div class="col-sm-6">
@@ -65,11 +71,40 @@
                             </div>
                         </InsertItemTemplate>
                     </asp:ListView>
-                    <asp:ObjectDataSource ID="RoleListViewODS" runat="server"></asp:ObjectDataSource>
+                    <asp:ObjectDataSource ID="RoleListViewODS" runat="server"
+                        DataObjectTypeName="ChinookSystem.Security.RoleProfile"
+                        DeleteMethod="RemoveRole"
+                        InsertMethod="AddRole"
+                        OldValuesParameterFormatString="original_{0}"
+                        SelectMethod="ListAllRoles"
+                        TypeName="ChinookSystem.Security.RoleManager" />
                 </div>
+
                 <!-- Unregistered User Tab -->
                 <div class="tab-pane fade" id="unregistered">
-                    <h2>Unregistered User CRUD</h2>
+                    <asp:GridView ID="UnregisteredUsersGridView" runat="server" AutoGenerateColumns="False" DataSourceID="UnregisteredUsersODS">
+                        <Columns>
+                            <asp:BoundField DataField="id" HeaderText="id" SortExpression="id"></asp:BoundField>
+                            <asp:BoundField DataField="UserType" HeaderText="UserType" SortExpression="UserType"></asp:BoundField>
+                            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName"></asp:BoundField>
+                            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName"></asp:BoundField>
+                            <asp:TemplateField HeaderText="AssignedUserName" SortExpression="AssignedUserName">
+                                <ItemTemplate>
+                                    <asp:TextBox runat="server" Text='<%# Bind("AssignedUserName") %>' ID="TextBox1"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="AssignedEmail" SortExpression="AssignedEmail">
+                                <ItemTemplate>
+                                    <asp:TextBox runat="server" Text='<%# Bind("AssignedEmail") %>' ID="TextBox2"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
+                        </Columns>
+                    </asp:GridView>
+                    <asp:ObjectDataSource ID="UnregisteredUsersODS" runat="server"
+                        OldValuesParameterFormatString="original_{0}"
+                        SelectMethod="ListAllUnregisteredUsers"
+                        TypeName="ChinookSystem.Security.UserManager" />
                 </div>
             </div>
         </div>
