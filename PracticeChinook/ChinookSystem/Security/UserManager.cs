@@ -56,12 +56,13 @@ namespace ChinookSystem.Security
             using (var context = new ChinookContext())
             {
                 // Get the list of registered employees, this will come from the AspNetUser table <ApplicationUser>, where the int? Employee attribute has a value
-                var RegisteredEmployees = from emp in Users
+                // Using .ToList() will place the results of your Linq query nto memory
+                var RegisteredEmployees = (from emp in Users
                                           where emp.EmployeeId.HasValue
-                                          select emp.EmployeeId;
+                                          select emp.EmployeeId).ToList();
 
                 // Compare the registered employee list to the user table Employees, extra the Employees that are not registered
-                var UnregisteredEmployees = from emp in context.Employees
+                var UnregisteredEmployees = (from emp in context.Employees
                                             where !RegisteredEmployees.Any(eid => emp.EmployeeId == eid)
                                             select new UnregisteredUserProfile()
                                             {
@@ -69,15 +70,15 @@ namespace ChinookSystem.Security
                                                 FirstName = emp.FirstName,
                                                 LastName = emp.LastName,
                                                 UserType = UnregisteredUserType.Employee
-                                            };
+                                            }).ToList();
 
                 // Get the list of registered customers, this will come from the AspNetUser table <ApplicationUser>, where the int? Customer attribute has a value
-                var RegisteredCustomers = from cus in Users
+                var RegisteredCustomers = (from cus in Users
                                           where cus.EmployeeId.HasValue
-                                          select cus.EmployeeId;
+                                          select cus.EmployeeId).ToList();
 
                 // Compare the registered employee list to the user table Employees, extra the Employees that are not registered
-                var UnregisteredCustomers = from cus in context.Customers
+                var UnregisteredCustomers = (from cus in context.Customers
                                             where !RegisteredCustomers.Any(cid => cus.CustomerId == cid)
                                             select new UnregisteredUserProfile()
                                             {
@@ -85,11 +86,49 @@ namespace ChinookSystem.Security
                                                 FirstName = cus.FirstName,
                                                 LastName = cus.LastName,
                                                 UserType = UnregisteredUserType.Customer
-                                            };
+                                            }).ToList();
 
                 // Make one dataset out of the two unregistered user types
                 return UnregisteredEmployees.Union(UnregisteredCustomers).ToList();
             }
+        } //eom
+
+        public void RegisterUser(UnregisteredUserProfile userInfo)
+        {
+            // One could randomly generate a password
+
+            // Create a new AspNetUser instance based on ApplicationUser
+            var newUserAccount = new ApplicationUser()
+            {
+                UserName = userInfo.AssignedUserName,
+                Email = userInfo.AssignedEmail
+            };
+
+            // Determine and assign the user id based on type
+            switch (userInfo.UserType)
+            {
+                case UnregisteredUserType.Customer:
+                    newUserAccount.CustomerId = userInfo.id;
+                    break;
+                case UnregisteredUserType.Employee:
+                    newUserAccount.EmployeeId = userInfo.id;
+                    break;
+            }
+
+            // Create the user account
+            this.Create(newUserAccount, STR_DEFAULT_PASSWORD);
+
+            // Assign the user to a role of RegisteredUser or Staff
+            switch (userInfo.UserType)
+            {
+                case UnregisteredUserType.Customer:
+                    this.AddToRole(newUserAccount.Id, SecurityRoles.RegisteredUsers);
+                    break;
+                case UnregisteredUserType.Employee:
+                    this.AddToRole(newUserAccount.Id, SecurityRoles.Staff);
+                    break;
+            }
+
         } //eom
     } //eoc
 } //eon

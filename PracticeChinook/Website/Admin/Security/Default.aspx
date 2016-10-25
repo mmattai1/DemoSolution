@@ -82,9 +82,9 @@
 
                 <!-- Unregistered User Tab -->
                 <div class="tab-pane fade" id="unregistered">
-                    <asp:GridView ID="UnregisteredUsersGridView" runat="server" AutoGenerateColumns="False" DataSourceID="UnregisteredUsersODS">
+                    <asp:GridView ID="UnregisteredUsersGridView" runat="server" AutoGenerateColumns="False" DataSourceID="UnregisteredUsersODS" AllowPaging="True">
                         <Columns>
-                            <asp:BoundField DataField="id" HeaderText="id" SortExpression="id"></asp:BoundField>
+                            <asp:CommandField ShowSelectButton="True" SelectText="Register"></asp:CommandField>
                             <asp:BoundField DataField="UserType" HeaderText="UserType" SortExpression="UserType"></asp:BoundField>
                             <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName"></asp:BoundField>
                             <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName"></asp:BoundField>
