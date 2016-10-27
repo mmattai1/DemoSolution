@@ -53,6 +53,12 @@ namespace ChinookSystem.Security
             return results.ToList();
         } //eom
 
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<string> ListAllRoleNames()
+        {
+            return Roles.Select(r => r.Name).ToList();
+        } //eom
+
         // Insert
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
         public void AddRole(RoleProfile role)

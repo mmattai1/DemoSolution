@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;    // UserStore, ApplicationDbC
 using Microsoft.AspNet.Identity;                    // UserManager
 using System.ComponentModel;
 using ChinookSystem.DAL;
+using ChinookSystem.Data.Entities;
 #endregion
 
 namespace ChinookSystem.Security
@@ -130,5 +131,58 @@ namespace ChinookSystem.Security
             }
 
         } //eom
+
+        //Create the UserProfile needed for the security form tab user CRUD
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<UserProfile> ListAllUsers()
+        {
+            var rm = new RoleManager();
+            var results = from person in Users.ToList()
+                          select new UserProfile()
+                          {
+                              UserId = person.Id,                                                       // Security table
+                              UserName = person.UserName,                                               // Security table
+                              Email = person.Email,                                                     // Security table
+                              EmailConfirmed = person.EmailConfirmed,                                   // Security table
+                              CustomerId = person.CustomerId,                                           // Applicaton User, security table
+                              EmployeeId = person.EmployeeId,                                           // Applicaton User, security table
+                              RoleMemberships = person.Roles.Select(r => rm.FindById(r.RoleId).Name)    //Security table
+                          };
+            // Obtain the first and last name of the users
+            using (var context = new ChinookContext())
+            {
+                Employee eTemp;
+                Employee cTemp;
+                foreach (var person in results)
+                {
+                    if (person.EmployeeId.HasValue)
+                    {
+                        eTemp = context.Employees.Find(person.EmployeeId);
+                        person.FirstName = eTemp.FirstName;
+                        person.LastName = eTemp.LastName;
+                    }
+                    else if (person.CustomerId.HasValue)
+                    {
+                        cTemp = context.Employees.Find(person.EmployeeId);
+                        person.FirstName = cTemp.FirstName;
+                        person.LastName = cTemp.LastName;
+                    }
+                    else
+                    {
+                        //person.FirstName = new
+                    }
+                }
+
+                return results.ToList();
+            }
+        } //eom
+
+        [DataObjectMethod(DataObjectMethodType.Insert, true)]
+        public void AddUser(UserProfile userInfo)
+        {
+            // Create an instance representing the new user
+            var UserAcccout = new ApplicationUser();
+
+        }
     } //eoc
 } //eon
