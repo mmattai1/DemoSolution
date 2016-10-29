@@ -169,7 +169,7 @@
                         AutoGenerateColumns="False" 
                         DataSourceID="UnregisteredUsersODS"
                          DataKeyNames="Id"
-                         ItemType="ChinookSystem.Security.UnRegisteredUserProfile" OnSelectedIndexChanging="UnregisteredUsersGridView_SelectedIndexChanging">
+                         ItemType="ChinookSystem.Security.UnregisteredUserProfile" OnSelectedIndexChanging="UnregisteredUsersGridView_SelectedIndexChanging">
                         <Columns>
                             <asp:CommandField SelectText="Register" ShowSelectButton="True"></asp:CommandField>
                             <asp:BoundField DataField="UserType" HeaderText="UserType" SortExpression="UserType"></asp:BoundField>
