@@ -11,30 +11,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChinookSystem.Data.Entities
 {
-    // [Table("sqltablename")]
+    //point to the sql table that this file maps
     [Table("Artists")]
     public class Artist
     {
-        // PKey annotation is optional
-        // Default assumes identity SQL table
-        // Default assumes property name ends with ID or Id and SQL PKey ends the same
-        // Otherwise [Key] is needed
-        // Non-identity PKeys, compound PKeys, PKeys not ending in ID or Id
+        //Key notations is optional if the sql pkey
+        //ends in ID or Id
+        //required if default of entity is NOT Identity
+        //required if pkey is compound
 
-        // Class properties map to SQL table attributes
-        // Properties should be named the same as table attributes
-        // Properties should be in the same order as table attributes for ease of maintenance
+        //properties can be fully implemented or
+        //auto implemented
+        //property names should use sql attribute name
+        //properties should be listed in the same order
+        //     as sql table attributes for easy of maintenance
         [Key]
         public int ArtistId { get; set; }
         public string Name { get; set; }
 
-        // Navigation properties for use by Linq
-        // Use the DB ERD to determine the relationships
-        // These properties will be of type virtual
-        // There are two types of navigation properties
-        // Properties that point to "children" (many) use ICollection<T> as the datatype
-        // Properties that point to "parent" (one) use ParentClassName as the datatype
-
+        //navigation properties for use by Linq
+        //these properties will be of type vitural
+        //there are two types of navigation properties
+        //properties that point to "children" use ICollection<T>
+        //properties that point to "Parent" use ParentName as the datatype
         public virtual ICollection<Album> Albums { get; set; }
     }
 }

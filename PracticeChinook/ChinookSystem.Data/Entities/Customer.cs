@@ -11,14 +11,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChinookSystem.Data.Entities
 {
-    [Table("Customers")]
     public class Customer
     {
-        [Key]
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Company { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -27,12 +24,11 @@ namespace ChinookSystem.Data.Entities
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
-
-        // By default the EntityFramework navigation expects foreign keys to have the same name as the parent primary key
-        // If not you MUST have the ForeignKey annotation to relate the foreign key field to the appropriate navigation property using the property name
         [ForeignKey("Employee")]
         public int? SupportRepId { get; set; }
 
         public virtual Employee Employee { get; set; }
+
     }
 }
+
