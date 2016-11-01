@@ -61,7 +61,7 @@ namespace ChinookSystem.BLL
         }
 
         // Delete which will remove an existing instance from the table collection
-        [DataObjectMethod(DataObjectMethodType.Update, true)]
+        [DataObjectMethod(DataObjectMethodType.Delete, true)]
         public void DeleteTrack(Track trackInfo)
         {
             using (var context = new ChinookContext())
