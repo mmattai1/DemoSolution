@@ -25,15 +25,35 @@ namespace ChinookSystem.Data.Entities
         //property names should use sql attribute name
         //properties should be listed in the same order
         //     as sql table attributes for easy of maintenance
+
+        // Validation annotation can go each field in your entity
+        // Validation of Entity kicks in on the .SaveChanges() stetment
+        // These validation annotations generate an Exception
+        // [Required(ErrorMessage="xxxxxx")]
+        // [StringLength(int_max, int_min, ErrorMessage="xxxxxx")]
+        // [Range(double_min, double_max, ErrorMessage="xxxxxx")]
+        // [RegularExpression("expression", ErrorMessage="xxx")]
         [Key]
         public int TrackId { get; set; }
+        [Required(ErrorMessage="Name is a required field.")]
+        [StringLength(200, ErrorMessage="Name is too long.  Max length is 200 characters.")]
         public string Name { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage="Album is invalid.  Attempt selection again.")]
         public int? AlbumId { get; set; }
+        [Required(ErrorMessage = "Media Type is a required field.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Media Type is invalid.  Attempt selection again.")]
         public int MediaTypeId { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Genre is invalid.  Attempt selection again.")]
         public int? GenreId { get; set; }
+        [StringLength(220, ErrorMessage = "Composer is too long.  Max length is 220 characters.")]
         public string Composer { get; set; }
+        [Required(ErrorMessage = "MSec is a required field.")]
+        [Range(1, int.MaxValue, ErrorMessage = "MSec is invalid.  Must be greater than 0.")]
         public int Milliseconds { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Bytes is invalid.  Must be greater than 0.")]
         public int? Bytes { get; set; }
+        [Required(ErrorMessage = "Price is a required field.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Price is invalid.  Must be 0 or greater.")]
         public decimal UnitPrice { get; set; }
 
         //navigation properties for use by Linq

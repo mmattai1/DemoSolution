@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="Track CRUD" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TrackCRUD.aspx.cs" Inherits="Admin_EntityMaintenance_TrackCRUD" %>
 
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="my" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
+    <div class="jumbotron">
+        <h3>Wired CRUD Maintenance</h3>
+    </div>
+    <%-- The follow is the user control to handle messgaes
+         To install the user control, drag from Website onto form --%>
+    <my:MessageUserControl runat="server" ID="MessageUserControl" />
+
     <%--Make sure to add the DataKeyNames property to allow deletes--%>
     <asp:ListView ID="TrackList" runat="server" DataSourceID="TrackListODS" InsertItemPosition="LastItem" DataKeyNames="TrackId">
         <AlternatingItemTemplate>
@@ -104,13 +113,13 @@
                     <asp:TextBox Text='<%# Bind("Name") %>' runat="server" ID="NameTextBox" /></td>
                 <td>
                     <%--<asp:TextBox Text='<%# Bind("AlbumId") %>' runat="server" ID="AlbumIdTextBox" />--%>
-                    <asp:DropDownList ID="AlbumList" runat="server" DataSourceID="AlbumODS" DataTextField="DisplayText" DataValueField="PFKeyIdentifier"></asp:DropDownList></td>
+                    <asp:DropDownList ID="AlbumList" runat="server" DataSourceID="AlbumODS" DataTextField="DisplayText" DataValueField="PFKeyIdentifier" SelectedValue='<%# Bind("AlbumId") %>'></asp:DropDownList></td>
                 <td>
                     <%--<asp:TextBox Text='<%# Bind("MediaTypeId") %>' runat="server" ID="MediaTypeIdTextBox" />--%>
                     <asp:DropDownList ID="MediaTypeList" runat="server" DataSourceID="MediaTypeODS" DataTextField="DisplayText" DataValueField="PFKeyIdentifier" SelectedValue='<%# Bind("MediaTypeId") %>'></asp:DropDownList></td>
                 <td>
                     <%--<asp:TextBox Text='<%# Bind("GenreId") %>' runat="server" ID="GenreIdTextBox" />--%>
-                    <asp:DropDownList ID="GenreList" runat="server" DataSourceID="GenreODS" DataTextField="DisplayText" DataValueField="PFKeyIdentifier"></asp:DropDownList></td>
+                    <asp:DropDownList ID="GenreList" runat="server" DataSourceID="GenreODS" DataTextField="DisplayText" DataValueField="PFKeyIdentifier" SelectedValue='<%# Bind("GenreId") %>'></asp:DropDownList></td>
                 <td>
                     <asp:TextBox Text='<%# Bind("Composer") %>' runat="server" ID="ComposerTextBox" /></td>
                 <td>
@@ -251,13 +260,13 @@
                 <td>
                     <asp:Label Text='<%# Eval("PlayLists") %>' runat="server" ID="PlayListsLabel" /></td>--%>
             </tr>
-        </SelectedItemTemplate>
+        </SelectedItemTemplate> 
     </asp:ListView>
     <asp:ObjectDataSource ID="TrackListODS" runat="server" DataObjectTypeName="ChinookSystem.Data.Entities.Track"
         DeleteMethod="DeleteTrack"
         InsertMethod="AddTrack" OldValuesParameterFormatString="original_{0}"
         SelectMethod="ListTracks" TypeName="ChinookSystem.BLL.TrackController"
-        UpdateMethod="UpdateTrack"></asp:ObjectDataSource>
+        UpdateMethod="UpdateTrack" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="AlbumODS" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="AlbumList" TypeName="ChinookSystem.BLL.AlbumController"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="MediaTypeODS" runat="server" OldValuesParameterFormatString="original_{0}"

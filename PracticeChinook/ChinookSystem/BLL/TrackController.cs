@@ -32,6 +32,12 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookContext())
             {
+                // Business rules
+                //if (trackInfo.UnitPrice > 1.00m)
+                //{
+                //    throw Exception("Bob's your uncle");
+                //}
+
                 // Review the iif
                 trackInfo.Composer = string.IsNullOrEmpty(trackInfo.Composer) ? null : trackInfo.Composer;
 
