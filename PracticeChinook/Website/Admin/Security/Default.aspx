@@ -17,6 +17,7 @@
             <div class="tab-content">
                 <!-- User Tab -->
                 <div class="tab-pane fade in active" id="users">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
                     <asp:ListView ID="UserListView" runat="server" 
                         DataSourceID="UserListViewODS"
                          InsertItemPosition="LastItem"
@@ -101,10 +102,12 @@
                         OldValuesParameterFormatString="original_{0}"
                         TypeName="ChinookSystem.Security.RoleManager" DataObjectTypeName="ChinookSystem.Security.RoleProfile" DeleteMethod="RemoveRole" InsertMethod="AddRole">
                     </asp:ObjectDataSource>
+                    </ContentTemplate> </asp:UpdatePanel>
                 </div>
 
                 <!-- Role Tab -->
                 <div class="tab-pane fade" id="roles">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server"><ContentTemplate>
                     <asp:ListView ID="RoleListView" runat="server"
                         DataSourceID="RoleListViewODS"
                         InsertItemPosition="LastItem"
@@ -161,10 +164,12 @@
                         OldValuesParameterFormatString="original_{0}"
                         SelectMethod="ListAllRoles"
                         TypeName="ChinookSystem.Security.RoleManager" />
+                    </ContentTemplate></asp:UpdatePanel>
                 </div>
 
                 <!-- Unregistered User Tab -->
                 <div class="tab-pane fade" id="unregistered">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server"><ContentTemplate>
                     <asp:GridView ID="UnregisteredUsersGridView" runat="server" 
                         AutoGenerateColumns="False" 
                         DataSourceID="UnregisteredUsersODS"
@@ -197,6 +202,7 @@
                         SelectMethod="ListAllUnRegisteredUsers" 
                         TypeName="ChinookSystem.Security.UserManager">
                     </asp:ObjectDataSource>
+                    </ContentTemplate></asp:UpdatePanel>
                 </div>
             </div>
         </div>

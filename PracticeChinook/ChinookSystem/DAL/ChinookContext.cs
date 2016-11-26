@@ -32,6 +32,6 @@ namespace ChinookSystem.DAL
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceLine> InvoiceLines { get; set; }
-        public DbSet<PlayList> PlayLists { get; set; }
+        public DbSet<Playlist> PlayLists { get; set; }
     }
 }

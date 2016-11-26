@@ -74,6 +74,6 @@ namespace ChinookSystem.Data.Entities
         //The navigation property set would be as  "children" 
 
         //Modeling of this relationship will be done in the context class
-        public virtual ICollection<PlayList> PlayLists { get; set; }
+        public virtual ICollection<Playlist> Playlists { get; set; }
     }
 }
