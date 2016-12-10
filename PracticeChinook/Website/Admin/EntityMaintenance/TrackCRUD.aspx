@@ -222,7 +222,7 @@
             </table>
         </LayoutTemplate>
         <SelectedItemTemplate>
-            <tr style="background-color: #008A8C; font-weight: bold; color: #FFFFFF;">
+            <tr style="background-color: #ff6a00; font-weight: bold; color: #FFFFFF;">
                 <td>
                     <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
                     <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
